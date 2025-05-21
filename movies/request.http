@@ -1,0 +1,21 @@
+@host = http://localhost:3000
+
+GET {{host}}/ping
+
+###
+GET {{host}}/movies
+
+###
+POST {{host}}/movies
+Content-Type: application/json
+
+{
+    "title": "The Dark Knight",
+    "year": 2008,
+    "director": "Christopher Nolan",
+    "actors": ["Christian Bale", "Heath Ledger", "Aaron Eckhart"]
+}
+
+###
+DELETE {{host}}/movies/1
+

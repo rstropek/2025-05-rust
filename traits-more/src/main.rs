@@ -6,15 +6,17 @@ trait Billable {
     fn bill(&self) -> f32;
 }
 
-
-mod blanket {
-    use crate::Billable;
-    // User gets 1 points per 100 spent
-    
+// Change to pub mod so it can be explicitly imported
+pub mod pointworthy {
     pub trait Pointworthy {
         fn point(&self) -> f32;
     }
     
+}
+
+pub mod blanket {
+    use crate::{pointworthy::Pointworthy, Billable};
+
     // Blanket implementation
     impl<T> Pointworthy for T where T: Billable {
         fn point(&self) -> f32 {
@@ -108,9 +110,17 @@ fn main() {
         println!("{}", billable.bill());    
     }
 
-    let pw: &dyn blanket::Pointworthy = &Consulting {
+    // Explicitly import the Pointworthy trait to use it
+    
+    let pw = &Consulting {
         hours: 10.0,
         rate: 100.0,
     };
-    println!("{}", pw.point());
+    
+    {
+        use crate::pointworthy::Pointworthy;
+        println!("{}", pw.point());
+    }
+
+    //println!("{}", pw.point());
 }

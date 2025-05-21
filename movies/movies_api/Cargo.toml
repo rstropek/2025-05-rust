@@ -1,0 +1,9 @@
+[package]
+name = "movies_api"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+movies_logic = { path = "../movies_logic" }
+tokio = { version = "1", features = ["full"] }
+axum = "0.8"

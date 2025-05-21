@@ -1,0 +1,6 @@
+[workspace]
+resolver = "3"
+members = [
+    "movies_logic",
+    "movies_api"
+]
